@@ -1,6 +1,7 @@
 import sys
 import traceback
 import os
+from config.supabase_config import SupabaseClient
 from shared.common import *
 from discord.ext.commands import ExtensionFailed, ExtensionNotFound
 
@@ -24,7 +25,16 @@ class KittyBot(commands.Bot):
             status = discord.Status.online,
             activity = discord.Game(name="Kitty Bot - type {}help for help commands.".format(config.BOT_PREFIX))
         )
+        print(config.SUPABASE_CLIENT_MESSAGE)
         print(config.STARTUP_MESSAGE_COMPLETE)
+        try:
+            client = SupabaseClient.get_instance()
+            print(config.SUPABASE_CLIENT_MESSAGE_COMPLETE)
+        except(
+            ExtensionNotFound,
+            ExtensionFailed
+        ) as e:
+            print(f"Error connecting to supabase client: {e}")
 
     async def setup_hook(self) -> None:
         for extension in extensions:

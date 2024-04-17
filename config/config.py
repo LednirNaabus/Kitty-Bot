@@ -12,3 +12,7 @@ STARTUP_MESSAGE = "Starting Kitty Bot v.1..."
 STARTUP_MESSAGE_COMPLETE = "Startup Complete!"
 
 BOT_PREFIX = "!"
+
+# Supabase configs
+SUPABASE_CLIENT_MESSAGE = "Initializing Supabase..."
+SUPABASE_CLIENT_MESSAGE_COMPLETE = "Supabase client connected!"
