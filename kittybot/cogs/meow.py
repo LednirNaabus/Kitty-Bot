@@ -7,8 +7,6 @@
 5. Sleepy meow
 """
 from shared.common import *
-from io import BytesIO
-import asyncio
 
 """Greets users with meow"""
 class Meow(commands.Cog):
