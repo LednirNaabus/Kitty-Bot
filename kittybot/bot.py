@@ -25,18 +25,7 @@ class KittyBot(commands.Bot):
             status = discord.Status.online,
             activity = discord.Game(name="Kitty Bot - type {}help for help commands.".format(config.BOT_PREFIX))
         )
-        print(config.SUPABASE_CLIENT_MESSAGE)
         print(config.STARTUP_MESSAGE_COMPLETE)
-        try:
-            client = SupabaseClient.get_instance()
-            response_ = client.storage.from_('images').list('cats') # check if client is connected; will just list bucket storage from supabase
-            print(response_)
-            print(config.SUPABASE_CLIENT_MESSAGE_COMPLETE)
-        except(
-            ExtensionNotFound,
-            ExtensionFailed
-        ) as e:
-            print(f"Error connecting to supabase client: {e}")
 
     async def setup_hook(self) -> None:
         for extension in extensions:
