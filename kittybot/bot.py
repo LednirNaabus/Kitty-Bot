@@ -29,6 +29,8 @@ class KittyBot(commands.Bot):
         print(config.STARTUP_MESSAGE_COMPLETE)
         try:
             client = SupabaseClient.get_instance()
+            response_ = client.storage.from_('images').list('cats') # check if client is connected; will just list bucket storage from supabase
+            print(response_)
             print(config.SUPABASE_CLIENT_MESSAGE_COMPLETE)
         except(
             ExtensionNotFound,
