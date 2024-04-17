@@ -2,4 +2,4 @@
 
 ---
 
-[ x ] Test
+- [ x ] Test
