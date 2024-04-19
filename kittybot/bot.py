@@ -16,7 +16,8 @@ class KittyBot(commands.Bot):
         if intents is None:
             intents = discord.Intents.default()
             intents.message_content = True
-        super().__init__(command_prefix=config.BOT_PREFIX, intents=intents)
+        self.SupabaseClient = SupabaseClient.get_instance()
+        super().__init__(command_prefix=config.BOT_PREFIX, SupabaseClient=SupabaseClient,intents=intents)
         self.add_listener(self.setup_hook)
 
     async def on_ready(self) -> None:
@@ -25,18 +26,17 @@ class KittyBot(commands.Bot):
             status = discord.Status.online,
             activity = discord.Game(name="Kitty Bot - type {}help for help commands.".format(config.BOT_PREFIX))
         )
-        print(config.SUPABASE_CLIENT_MESSAGE)
         print(config.STARTUP_MESSAGE_COMPLETE)
+        print(config.SUPABASE_CLIENT_MESSAGE)
         try:
-            client = SupabaseClient.get_instance()
-            response_ = client.storage.from_('images').list('cats') # check if client is connected; will just list bucket storage from supabase
-            print(response_)
+            client = self.SupabaseClient
+            response = client.storage.from_('images').list('cats') # check if client is connected; will just list file from buckets to verify
+            print(response)
             print(config.SUPABASE_CLIENT_MESSAGE_COMPLETE)
-        except(
-            ExtensionNotFound,
-            ExtensionFailed
-        ) as e:
-            print(f"Error connecting to supabase client: {e}")
+        except AttributeError as a:
+            print(f'Attribute Error: {a}')
+        except Exception as e:
+            print(f'Error connecting to Supabase: {e}')
 
     async def setup_hook(self) -> None:
         for extension in extensions:
