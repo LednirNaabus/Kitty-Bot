@@ -4,6 +4,11 @@
 
 **Kitty Bot** is a simple Discord bot created written in Python.
 
+## Overview
+- Utilizes [Supabase](https://supabase.com/) to store the photos
+- Locally hosted using WSL2
+  - Just run `main.py`
+
 ## Commands (`!` as the prefix)
 - Kitty Bot can send you different types of meow depending on their emotion:
   - `angrymeow`
