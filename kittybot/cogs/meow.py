@@ -31,7 +31,7 @@ class Meow(commands.Cog):
         await ctx.send(f'meow... {ctx.author} {self.emotion["sad_face"]}')
 
     # Angry meow
-    @commands.command(name='hiss', aliases=['ma'])
+    @commands.command(name='angrymeow', aliases=['ma'])
     async def angry_meow(self, ctx):
         await ctx.send(f'meow!!! *hiss* {ctx.author} {self.emotion["angry_face"]}')
 
