@@ -16,7 +16,7 @@ class KittyBot(commands.Bot):
         if intents is None:
             intents = discord.Intents.default()
             intents.message_content = True
-        self.SupabaseClient = SupabaseClient
+        self.SupabaseClient = SupabaseClient.get_instance()
         super().__init__(command_prefix=config.BOT_PREFIX, SupabaseClient=SupabaseClient,intents=intents)
         self.add_listener(self.setup_hook)
 
@@ -29,10 +29,12 @@ class KittyBot(commands.Bot):
         print(config.STARTUP_MESSAGE_COMPLETE)
         print(config.SUPABASE_CLIENT_MESSAGE)
         try:
-            client = self.SupabaseClient.get_instance()
-            response = client.storage.from_('images').list('cats') # check if client is connected; will just list file from buckets
+            client = self.SupabaseClient
+            response = client.storage.from_('images').list('cats') # check if client is connected; will just list file from buckets to verify
             print(response)
             print(config.SUPABASE_CLIENT_MESSAGE_COMPLETE)
+        except AttributeError as a:
+            print(f'Attribute Error: {a}')
         except Exception as e:
             print(f'Error connecting to Supabase: {e}')
 
