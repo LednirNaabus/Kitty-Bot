@@ -3,5 +3,5 @@
 ---
 
 - [x] Add supabase database to hold pics/memes
-  - [ ] Create `sendpics` command to retrieve images from Supabase database
+  - [x] Create `sendpics` command to retrieve images from Supabase database
 - [ ] Add host
